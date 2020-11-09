@@ -1,0 +1,18 @@
+version: "3"
+
+services:
+  neo4j-cluster:
+    image: neo4j
+    restart: always
+    ports:
+      - 6464:7474 # for HTTP
+      - 6463:7473 # for HTTPS
+      - 6667:7687 # for Bolt
+    volumes:
+      - $PWD/neo4j:/data
+      - $PWD/neo4j/logs:/logs
+    environment:
+      NEO4J_AUTH: neo4j/setpassword
+      NEO4J_dbms_memory_pagecache_size: 1G
+      NEO4J_dbms_memory_heap_initial__size: 1G
+      NEO4J_dbms_memory_heap_max__size: 1G
